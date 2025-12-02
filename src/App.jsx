@@ -1,11 +1,12 @@
 import Navbar from './Componentes/Navbar'
 import Home from './Componentes/Home'
 import Footer from './Componentes/Footer'
+import Register from './Componentes/Register'
 import './App.css'
 
 
 
-function App() {
+const App = () =>  {
  
 
   return (
@@ -13,7 +14,8 @@ function App() {
       <Navbar />
 
       <main className='container p-0'  >
-        <Home  />
+        {/*<Home  /> */}
+        <Register />
       </main>
 
       <Footer />
