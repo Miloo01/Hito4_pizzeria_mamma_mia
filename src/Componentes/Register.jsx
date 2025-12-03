@@ -53,7 +53,7 @@ const Register = () => {
         <>
             <form className="formulario w-50 mx-auto text-start" onSubmit={validarDatos}>
 
-              
+              <h3 className='style-login mt-4 fs-2'>Registro</h3>
                 
                 <div className="form-group ">
                     <label className='style-e mt-4 mb-2'>Email</label>
@@ -69,7 +69,7 @@ const Register = () => {
                 <div className="form-group">
                     <label className='style-c mt-4 mb-2'>Contraseña</label>
                     <input
-                        type="text"
+                        type="password"
                         name="contraseña"
                         className="form-control"
                         onChange={(e) => setContraseña(e.target.value)}
@@ -80,7 +80,7 @@ const Register = () => {
                 <div className="form-group ">
                     <label className='style-cc mt-4 mb-2'>Confirmar Contraseña</label>
                     <input
-                        type="text"
+                        type="password"
                         name="confirmarcontraseña"
                         className="form-control"
                         onChange={(e) => setConfirmarContraseña(e.target.value)}

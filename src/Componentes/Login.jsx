@@ -57,7 +57,7 @@ const Login = () => {
                 <div className="form-group">
                     <label className='style-c mt-4 mb-2'>Contraseña</label>
                     <input
-                        type="text"
+                        type="password"
                         name="contraseña"
                         className="form-control"
                         onChange={(e) => setContraseña(e.target.value)}
