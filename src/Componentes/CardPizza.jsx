@@ -9,15 +9,18 @@ const CardPizza = ({ name = 'Pizza', price = 0, ingredients = [], img }) => {
             <div className="card shadow-sm h-100 ">
                 <img src={img || 'https://via.placeholder.com/400x250?text=Pizza'} className="card-img-top" alt={name} />
                 <div className="card-body d-flex flex-column">
-                    <h5 className="card-title"> Pizza {name}</h5>
+                    <h5 className="card-title text-start"> Pizza {name}</h5>
                     <hr />
-                    <h5> 🍕 Ingredientes:</h5>
-                    <p className="card-text">{ingredients && ingredients.length ? ingredients.join(', ') : 'Ingredientes no especificados'}</p>
-                    <hr />
-                    <p className="fw-bold text-success">${priceFormatted}</p>
+                    <h5 className="text-start"> 🍕 Ingredientes:</h5>
+                    <ul className="card-text-ingredients text-start">
+                        {ingredients.map((ingredient, id) => (
+                            <li key={id}>{ingredient}</li>
+                        ))}
+                    </ul>
+                    <p className="fw-bold text-success text-center">${priceFormatted}</p>
                     <div className="mt-auto">
                         <button className="btn btn-info text-white me-2">Ver Más 👀</button>
-                        <button className="btn btn-danger">Añadir 🛒</button>
+                        <button className="btn btn-danger">Añadir al carro 🛒</button>
                     </div>
                 </div>
             </div>
