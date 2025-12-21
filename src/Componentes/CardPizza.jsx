@@ -19,7 +19,7 @@ const CardPizza = ({ name = 'Pizza', price = 0, ingredients = [], img }) => {
                     </ul>
                     <p className="fw-bold text-success text-center">${priceFormatted}</p>
                     <div className="mt-auto">
-                        <button className="btn btn-info text-white me-2">Ver Más 👀</button>
+                        <button className="btn btn-info text-white  mb-2" >Ver Más 👀</button>
                         <button className="btn btn-danger">Añadir al carro 🛒</button>
                     </div>
                 </div>
