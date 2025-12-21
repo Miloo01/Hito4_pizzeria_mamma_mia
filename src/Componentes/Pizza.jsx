@@ -34,7 +34,7 @@ const Pizza = () => {
                     <p className="card-text">{pizza.desc}</p>
                     <h5>Ingredientes:</h5>
                     <ul className="list-unstyled">
-                        {pizza.ingredients.map((ing, i) => (
+                        {pizza.ingredients?.map((ing, i) => (
                             <li key={i}>🍕 {ing}</li>
                         ))}
                     </ul>
