@@ -1,3 +1,4 @@
+import { Route, Routes } from 'react-router-dom'
 import Navbar from './Componentes/Navbar'
 import Home from './Componentes/Home'
 import Footer from './Componentes/Footer'
@@ -16,6 +17,14 @@ const App = () =>  {
   return (
     <div className="app">
       <Navbar />
+
+
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/cart' element={<Cart />} />
+      </Routes>
 
       <main className='container p-0'  >
        {/*<Home />  /*hito 4 */}
