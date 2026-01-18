@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navbar as RBNavbar, Container, Nav } from 'react-bootstrap'
 import { formatNumber } from '../utils/format'
+import { CartContext } from '../context/CartContext'
 import { FaHome, FaShoppingCart, FaLock, FaUnlock, FaSignInAlt, FaUserPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Home from '../Pages/Home'
@@ -8,9 +9,12 @@ import Home from '../Pages/Home'
 
 
 const Navbar = () => {
+    const { getTotal, getCartCount } = useContext(CartContext)
+    
     // Simulaciones de estado
     const token = false // true = usuario logueado
-    const total = 25000
+    const total = getTotal()
+    const cartCount = getCartCount()
 
     const totalFormatted = formatNumber(total)
 
@@ -52,7 +56,9 @@ const Navbar = () => {
 
                     <Nav className="ms-auto">
                         <Link to="/cart" className="text-black ms-3 text-decoration-none">
-                            <button type="button" className="btn btn-warning text-dark">🛒 Total: ${totalFormatted}</button>
+                            <button type="button" className="btn btn-warning text-dark">
+                                🛒 Total: ${totalFormatted} {cartCount > 0 && <span className="badge bg-danger ms-2">{cartCount}</span>}
+                            </button>
                         </Link>
                     </Nav>
                 </RBNavbar.Collapse>

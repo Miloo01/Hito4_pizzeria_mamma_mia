@@ -1,51 +1,60 @@
-import React from 'react'
-import {pizzaCart} from '../pizzas.js'
-import { useState } from 'react'
-import {formatNumber} from "../utils/format";
+import React, { useContext } from 'react'
+import { CartContext } from '../context/CartContext'
+import { formatNumber } from "../utils/format";
 
 
 const Cart = () => {
-    const [cart, setCart] = useState(pizzaCart);
+  const { cart, incrementCart, decrementCart, removeFromCart, getTotal } = useContext(CartContext);
 
-    
-    const increase = (id) => {
-        setCart(cart.map(pizza => pizza.id === id ? {...pizza, count: pizza.count + 1} : pizza));
-    };
-    
-    const decrease = (id) => {
-        setCart(cart.map(pizza => pizza.id === id && pizza.count > 0 ? {...pizza, count: pizza.count - 1} : pizza));
-    };
-    
-    const total = cart.reduce((acc, pizza) => acc + pizza.price * pizza.count, 0);
-  
-    return (
+  return (
+    <div className="cart-container d-flex flex-column justify-content-around align-items-center p-4 mt-4 p-5 bg-light">
+      <h4 className="mb-3">Detalles del pedido:</h4>
 
-    <div className="cart-container d-flex flex-column justify-content-around  align-items-center p-4 mt-4 p-5 bg-light">
-        <h4 className="mb-3 ">Detalles del pedido:</h4>
-        <ul className='list-group'>
-          {cart.map((pizza) => (
-           <li key={pizza.id} className="list-group-item d-flex justify-content-between ">
-            <div>
-              <img src={pizza.img} alt={pizza.name} width="70" className="me-3" />
-              <strong className="text-capitalize me-5">{pizza.name}</strong>
+      {cart.length === 0 ? (
+        <p className="text-muted">El carrito está vacío</p>
+      ) : (
+        <>
+          <ul className='list-group w-100'>
+            {cart.map((pizza) => (
+              <li key={pizza.id} className="list-group-item d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center">
+                  <img src={pizza.img} alt={pizza.name} width="70" className="me-3 rounded" />
+                  <div>
+                    <strong className="text-capitalize">{pizza.name}</strong>
+                    <p className="text-muted mb-0">${formatNumber(pizza.price)}</p>
+                  </div>
+                </div>
 
-            </div>
-
-            
-            <div className="d-flex align-items-center">
-              <span className="me-2"> ${formatNumber(pizza.price)}</span> 
-              <button className="btn btn-sm btn-success me-2" onClick={() => increase(pizza.id)}>+</button>
-              <button className="btn btn-sm btn-danger me-2" onClick={() => decrease(pizza.id)}>-</button>
-              Cantidad: {pizza.count}
-            </div>
-          </li>
-          ))}
-        </ul>
-         <h5 className="mt-3 mb-3">Total: $ {formatNumber(total)}</h5>
-         <button className="btn btn-primary mb-4">Pagar</button>
-    
+                <div className="d-flex align-items-center gap-2">
+                  <button
+                    className="btn btn-sm btn-danger"
+                    onClick={() => decrementCart(pizza.id)}
+                  >
+                    −
+                  </button>
+                  <span className="badge bg-primary">{pizza.count}</span>
+                  <button
+                    className="btn btn-sm btn-success"
+                    onClick={() => incrementCart(pizza.id)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-danger"
+                    onClick={() => removeFromCart(pizza.id)}
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <h5 className="mt-4 mb-4">Total: $ {formatNumber(getTotal())}</h5>
+          <button className="btn btn-primary mb-4 px-5">Pagar</button>
+        </>
+      )}
     </div>
-    )
+  )
 }
 
 export default Cart

@@ -10,38 +10,43 @@ import NotFound from './Componentes/NotFound'
 import Profile from './Componentes/Profile'
 import './App.css'
 
+import CartProvider from './context/CartContext'
+import CardPizza from './Componentes/CardPizza'
 
 
 
-const App = () =>  {
- 
+
+const App = () => {
+
 
   return (
-    <div className="app">
-      <Navbar />
 
+    <CartProvider>
+      <div className="app">
+        <Navbar />
 
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/pizza/p001' element={<Pizza />} />
-        <Route path='profile' element={<Profile />} /> 
-        <Route path='/404' element={<NotFound />} /> 
-        <Route path='*' element={<NotFound />} /> 
-      </Routes>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/pizza/p001' element={<Pizza />} />
+          <Route path='profile' element={<Profile />} />
+          <Route path='/404' element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
 
-      <main className='container p-0'  >
-       {/*<Home />  /*hito 4 */}
-       {/*<Pizza/>  {/* hito 4 */}
-       {/*<Register /> {/* hito2 */}
-       {/*<Login /> */ /* hito2 */}
-         
-      </main>
-      {/*<Cart />*/ /* hito3 */}
-      <Footer />
-    </div>
+        <main className='container p-0'  >
+          {/*<Home />  /*hito 4 */}
+          {/*<Pizza />  /*hito 4 */} 
+          {/*<Register /> {/* hito2 */}
+          {/*<Login /> */ /* hito2 */}
+
+        </main>
+        <Footer />
+
+      </div >
+    </CartProvider>
   )
 }
 
