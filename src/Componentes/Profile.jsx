@@ -22,8 +22,10 @@ const Profile = () => {
   const styles = {
     section: {
       backgroundColor: "#F8F9FA",
-      minHeight: "80vh",
-      paddingTop: "50px"
+      paddingTop: "50px",
+      paddingBottom: "50px",
+      minHeight: "100vh",
+      
     },
     card: {
       border: "none",
@@ -33,10 +35,10 @@ const Profile = () => {
     },
     header: {
       background: "linear-gradient(to right, #FF8800, #FFD300)",
-      height: "120px"
+      height: "100px"
     },
     avatar: {
-      width: "120px",
+      width: "10px",
       height: "120px",
       borderRadius: "50%",
       border: "5px solid white",

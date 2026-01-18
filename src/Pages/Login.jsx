@@ -67,7 +67,11 @@ const Login = () => {
                     />
                 </div>
 
-                <button type="submit" className="btn btn-primary mt-3">Login</button>
+                <button type="submit" className="btn btn-primary mt-3"
+                style={{backgroundColor: "#1A1A1A", border: "none", padding: "10px 25px", borderRadius: "50px", fontWeight: "bold", transition: "0.3s"}}
+                onMouseOver={(e) => e.target.style.backgroundColor = "#FF8800"}
+                onMouseOut={(e) => e.target.style.backgroundColor = "#1A1A1A"}>Login</button>
+                
             </form>
              
         </>

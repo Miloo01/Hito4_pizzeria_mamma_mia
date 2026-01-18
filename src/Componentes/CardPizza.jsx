@@ -25,8 +25,8 @@ const CardPizza = ({ id = 'P000', name = 'Pizza', price = 0, ingredients = [], i
                     </ul>
                     <p className="fw-bold text-success text-center">${priceFormatted}</p>
                     <div className="mt-auto">
-                        <button className="btn btn-info text-white m-2 " >Ver Más 👀</button>
-                        <button className="btn btn-danger" onClick={handleAddToCart}>Añadir al carro 🛒</button>
+                        <button className="btn btn-success text-white m-2 " >Ver Más 👀</button>
+                        <button className="btn btn-danger text-black" style={{background: "linear-gradient(to right, #FF8800, #FFD300)"}} onClick={handleAddToCart}>Añadir al carro 🛒</button>
                     </div>
                 </div>
                 

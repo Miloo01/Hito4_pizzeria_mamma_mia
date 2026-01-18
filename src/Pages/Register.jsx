@@ -16,28 +16,28 @@ const Register = () => {
         e.preventDefault();
 
         //Validación;
-        
+
         if (!email.trim() || !contraseña.trim() || !confirmarcontraseña.trim()) {
             setError(true);
             alert("Todos los campos son obligatorios");
 
-            
+
         } else if (contraseña.length < 6) {
             setError(true);
             alert("La contraseña debe tener al menos 6 caracteres");
 
-            
+
         } else if (contraseña !== confirmarcontraseña) {
             setError(true);
             alert("Las contraseñas no coinciden");
-            
+
         } else if (contraseña === confirmarcontraseña) {
             setError(false);
             alert("Registro exitoso");
 
         }
 
-        
+
 
         // Si el formulario se envía correctamente devolvemos todos nuestros estados al inicial y reseteamos el formulario
         setError(false);
@@ -53,8 +53,8 @@ const Register = () => {
         <>
             <form className="formulario w-50 mx-auto text-start" onSubmit={validarDatos}>
 
-              <h3 className='style-login mt-4 fs-2'>Registro</h3>
-                
+                <h3 className='style-login mt-4 fs-2'>Registro</h3>
+
                 <div className="form-group ">
                     <label className='style-e mt-4 mb-2'>Email</label>
                     <input
@@ -91,10 +91,14 @@ const Register = () => {
                     />
                 </div>
 
-                <button type="submit" className="btn btn-primary mt-3 ">Enviar</button>
+                <button type="submit" className="btn btn-primary mt-3 "
+                    style={{ backgroundColor: "#1A1A1A", border: "none", padding: "10px 25px", borderRadius: "50px", fontWeight: "bold", transition: "0.3s" }}
+                    onMouseOver={(e) => e.target.style.backgroundColor = "#FF8800"}
+                    onMouseOut={(e) => e.target.style.backgroundColor = "#1A1A1A"}>Enviar
+                </button>
             </form>
 
-         
+
         </>
 
 
