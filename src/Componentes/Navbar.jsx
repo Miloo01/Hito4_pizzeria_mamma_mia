@@ -5,17 +5,21 @@ import { CartContext } from '../context/CartContext'
 import { FaHome, FaShoppingCart, FaLock, FaUnlock, FaSignInAlt, FaUserPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Home from '../Pages/Home'
+import { UserContext } from '../context/UserContext'    
 
 
 
 const Navbar = () => {
     const { getTotal, getCartCount } = useContext(CartContext)
     
-    // Simulaciones de estado
-    const token = false // true = usuario logueado
+    // se extrae el token y el método logout del contexto de usuario
+    const { token, logout } = useContext(UserContext)
+
+
+
+
     const total = getTotal()
     const cartCount = getCartCount()
-
     const totalFormatted = formatNumber(total)
 
     return (
@@ -39,15 +43,16 @@ const Navbar = () => {
                     <Nav>
                         {token ? (
                             <>
-                                <Nav.Link href="#profile">🔓 Profile</Nav.Link>
-                                <Nav.Link href="#logout">🔒 Logout</Nav.Link>
+                                    <Nav.Link as={Link} to="/profile">🔓 Profile</Nav.Link>
+                                    {/* Se llama a Logout al hacer click */}
+                                    <Nav.Link onClick={logout} style={{cursor:'pointer'}}>🔒 Logout</Nav.Link>
                             </>
                         ) : (
                             <>
-                                <Link to="/login" className="text-black ms-3 text-decoration-none">
+                                <Link as={Link} to="/login" className="text-black ms-3 text-decoration-none">
                                     <Nav.Link href="#login">🔐 Login</Nav.Link>
                                 </Link>
-                                <Link to="/register" className="text-black ms-3 text-decoration-none">
+                                <Link as={Link} to="/register" className="text-black ms-3 text-decoration-none">
                                     <Nav.Link href="#register">🔐 Register</Nav.Link>
                                 </Link>
                             </>
