@@ -1,18 +1,21 @@
 import React from 'react'
 import { useState, useEffect } from "react";
+import {useParams } from 'react-router-dom';
 
 const Pizza = () => {
     // 3 - pizza guardará los valores traídos desde la API
     const [pizza, setPizza] = useState({});
 
-    // 2 - Llamamos a la función consultarApi al momento de montar el componente
+    const { id } = useParams(); // obtengo el id desde los parámetros de la URL
+
+    // 2 - Se llama a la función consultarApi al momento de montar el componente
     useEffect(() => {
         consultarApi();
-    }, []);
+    }, [id]); // Se agrega el [id] al array de dependencias para que si el id cambia, se vuelva a ejecutar
 
     // 1 - Función que consulta la API
     const consultarApi = async () => {
-        const url = "http://localhost:5000/api/pizzas/p001"; // Endpoint de la API
+        const url = `http://localhost:5000/api/pizzas/${id}`; // Endpoint de la API se concatena con el id para que el contenido sea dinámico
         const response = await fetch(url);
         const data = await response.json();
         setPizza(data); // se guarda la pizza completa en el estado
