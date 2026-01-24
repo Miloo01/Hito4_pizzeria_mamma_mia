@@ -8,17 +8,27 @@ export const UserContext = createContext()
 const UserProvider = ({ children }) => {
         //Estado inicial de token en true
     const [token, setToken] = useState(true); // Simulación de estado de autenticación
+    
+    // Método para iniciar sesión
+    const login = () => {
+        setToken(true);
+    };
 
     // Método para cerrar sesión
     const logout = () => {
         setToken(false);
     };
 
-
-
+    const user = {
+        email: "desafiolatam2024@gmail.com",
+        name: "Mario Rossi",
+        memberSince: "Octubre 2023",
+        orders: 15,
+    };
+    
 
   return (
-    <UserContext.Provider value={{token, logout}}>
+    <UserContext.Provider value={{token, login, logout, user}}>
       {children}
     </UserContext.Provider>
   )

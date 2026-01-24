@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Navbar as RBNavbar, Container, Nav } from 'react-bootstrap'
 import { formatNumber } from '../utils/format'
 import { CartContext } from '../context/CartContext'
-import { FaHome, FaShoppingCart, FaLock, FaUnlock, FaSignInAlt, FaUserPlus } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Home from '../Pages/Home'
 import { UserContext } from '../context/UserContext'    
 
@@ -15,7 +14,7 @@ const Navbar = () => {
     // se extrae el token y el método logout del contexto de usuario
     const { token, logout } = useContext(UserContext)
 
-
+    const setActiveClass = ({ isActive }) => (isActive ? 'active' : 'undefined')
 
 
     const total = getTotal()
@@ -43,18 +42,16 @@ const Navbar = () => {
                     <Nav>
                         {token ? (
                             <>
-                                    <Nav.Link as={Link} to="/profile">🔓 Profile</Nav.Link>
+                                    <NavLink className={setActiveClass} to="/profile">🔓 Profile</NavLink>
                                     {/* Se llama a Logout al hacer click */}
-                                    <Nav.Link onClick={logout} style={{cursor:'pointer'}}>🔒 Logout</Nav.Link>
+                                    <NavLink onClick={logout} style={{cursor:'pointer'}}>🔒 Logout</NavLink>
                             </>
                         ) : (
                             <>
-                                <Link as={Link} to="/login" className="text-black ms-3 text-decoration-none">
-                                    <Nav.Link href="#login">🔐 Login</Nav.Link>
-                                </Link>
-                                <Link as={Link} to="/register" className="text-black ms-3 text-decoration-none">
-                                    <Nav.Link href="#register">🔐 Register</Nav.Link>
-                                </Link>
+                                <Nav.Link as={Link} to="/login" >🔐 Login</Nav.Link>
+                                <Nav.Link as={Link} to="/register">🔐 Register</Nav.Link>
+
+                                
                             </>
                         )}
                     </Nav>

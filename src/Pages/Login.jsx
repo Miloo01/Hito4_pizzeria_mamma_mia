@@ -1,5 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 
 const Login = () => {
 
@@ -9,6 +11,10 @@ const Login = () => {
     
         //Estado para los errores
         const [error, setError] = useState(false);
+
+        //Se extrae el método login del contexto
+        const { login } = useContext(UserContext);
+        const navigate = useNavigate();
     
         const validarDatos = (e) => {
             e.preventDefault();
@@ -24,6 +30,10 @@ const Login = () => {
             } else {
                 setError(false);
                 alert("Login exitoso");
+                //Llamar al método login para restaurar el token
+                login();
+                //Redirigir a home
+                navigate("/");
             }
     
             // Si el formulario se envía correctamente devolvemos todos nuestros estados al inicial y reseteamos el formulario

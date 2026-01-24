@@ -1,10 +1,14 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import { formatNumber } from "../utils/format";
+import { UserContext } from '../context/UserContext';
 
 
 const Cart = () => {
   const { cart, incrementCart, decrementCart, removeFromCart, getTotal } = useContext(CartContext);
+  
+  // Se extrae el token del contexto de usuario
+  const { token } = useContext(UserContext);
 
   return (
     <div className="cart-container d-flex flex-column justify-content-around align-items-center p-4 mt-4 p-5 bg-light">
@@ -50,11 +54,16 @@ const Cart = () => {
             ))}
           </ul>
           <h5 className="mt-4 mb-4">Total: $ {formatNumber(getTotal())}</h5>
+          {/*lógica para mostrar el botón de pagar solo si el usuario está autenticado*/}
           <button className="btn btn-primary mb-4 px-5"
+          //el boton se deshabilita si no hay token
+            disabled={!token}
             style={{ backgroundColor: "#1A1A1A", border: "none", padding: "10px 25px", borderRadius: "50px", fontWeight: "bold", transition: "0.3s" }}
             onMouseOver={(e) => e.target.style.backgroundColor = "#FF8800"}
             onMouseOut={(e) => e.target.style.backgroundColor = "#1A1A1A"}>Pagar
           </button>
+
+          {!token && <p className="text-danger">Debes iniciar sesión para proceder al pago.</p>}
         </>
       )}
     </div>

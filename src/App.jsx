@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import Navbar from './Componentes/Navbar'
 import Home from './Pages/Home'
 import Footer from './Componentes/Footer'
@@ -13,43 +13,49 @@ import './App.css'
 import CartProvider from './context/CartContext'
 import CardPizza from './Componentes/CardPizza'
 import UserProvider from './context/UserContext'
+import { useContext } from 'react'
+import { UserContext } from './context/UserContext'
 
 
 
 
-const App = () => {
-
+const AppContent = () => {
+  const { token } = useContext(UserContext);
 
   return (
+    <CartProvider>
+      <div className="app d-flex flex-column min-vh-100">
+        <Navbar />
 
-    <UserProvider>
-      <CartProvider>
-        <div className="app">
-          <Navbar />
-
+        <main className="flex-grow-1">
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={token ? <Navigate to="/" /> : <Register />} />
+            <Route path='/login' element={token ? <Navigate to="/" /> : <Login />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/pizza/p001/:id' element={<Pizza />} />
-            <Route path='profile' element={<Profile />} />
+            <Route path='/profile' element={token ? <Profile /> : <Navigate to="/login" />} />
             <Route path='/404' element={<NotFound />} />
             <Route path='*' element={<NotFound />} />
             <Route path='/pizza/:id' element={<Pizza />} />
+            
           </Routes>
+        </main>
+        <Footer />
+      </div>
+       
+    </CartProvider>
+    
 
-          <main className='container p-0'  >
-            {/*<Home />  /*hito 4 */}
-            {/*<Pizza />  /*hito 4 */} 
-            {/*<Register /> {/* hito2 */}
-            {/*<Login /> */ /* hito2 */}
 
-          </main>
-          <Footer />
+  )
+  
+}
 
-        </div >
-      </CartProvider>
+const App = () => {
+  return (
+    <UserProvider>
+      <AppContent />
     </UserProvider>
   )
 }
